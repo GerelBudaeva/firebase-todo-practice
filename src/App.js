@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import CreateTaskForm from './CreateTaskForm';
+import TaskList from './TaskList';
+import {useState} from 'react';
+import EditTaskForm from './EditTaskForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [editTaskId, setEditTaskId] = useState(null);
+
+    const onEdit = (id) => {
+        console.log(id)
+        setEditTaskId(id)
+    }
+
+    const onEditCancel = () => {
+        setEditTaskId(null)
+    }
+
+    return (
+        <div className="container mt-3" >
+            <CreateTaskForm/>
+            <TaskList onEdit={onEdit}/>
+            <EditTaskForm id={editTaskId} onCancel={onEditCancel}/>
+        </div>
+    );
 }
 
 export default App;
